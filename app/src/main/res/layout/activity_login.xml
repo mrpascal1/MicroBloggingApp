@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bgg"
-    tools:context=".LOGINACTIVITY">
+    tools:context=".LoginActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/nuser"
         android:layout_below="@+id/logbtn"
-        android:text="NEW USER ? SIGN UP"
+        android:text="@string/new_user_sign_up"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:layout_margin="2dp"
