@@ -21,10 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
- EditText username;
- EditText password;
- TextView nuser;
- MaterialButton logbtn;
+    EditText username;
+    EditText password;
+    TextView nuser;
+    MaterialButton logbtn;
 
     @Override
     public void onStart() {
@@ -42,11 +42,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         username = findViewById(R.id.username);
-         password = findViewById(R.id.password);
-         logbtn =   findViewById(R.id.logbtn);
-         nuser = findViewById(R.id.nuser);
-         auth = FirebaseAuth.getInstance();
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        logbtn =   findViewById(R.id.logbtn);
+        nuser = findViewById(R.id.nuser);
+        auth = FirebaseAuth.getInstance();
         logbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,9 +55,11 @@ public class LoginActivity extends AppCompatActivity {
                 pass = password.getText().toString();
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(LoginActivity.this,"ENTER EMAIL",Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                if (TextUtils.isEmpty(pass)){
-                    Toast.makeText(LoginActivity.this,"ENTER PASSWORD",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(pass) && pass.length() > 6){
+                    Toast.makeText(LoginActivity.this,"ENTER PROPER PASSWORD",Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 auth.signInWithEmailAndPassword(email, pass)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
@@ -76,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-                    }
-                });
-}
+            }
+        });
+    }
 }
