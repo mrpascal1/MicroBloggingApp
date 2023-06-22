@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MicroBloggingApp</string>
+    <string name="new_user_sign_up"><font color = "white">NEW USER ? SIGN UP</font></string>
 </resources>
