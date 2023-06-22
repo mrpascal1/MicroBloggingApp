@@ -11,5 +11,6 @@
         android:layout_alignParentBottom="true"
         android:textAlignment="center"
         app:itemTextColor="@color/black"
+
         app:menu="@menu/main_menu"/>
 </RelativeLayout>
