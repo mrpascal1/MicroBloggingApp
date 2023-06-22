@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "667143482480",
+    "firebase_url": "https://microbloggingapp-205a7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "microbloggingapp-205a7",
+    "storage_bucket": "microbloggingapp-205a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667143482480:android:f62c83b8e5db3f3ed598b5",
+        "android_client_info": {
+          "package_name": "com.heuristic.microbloggingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667143482480-586l0j5e18jnemlkljndsufqib2mcud7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsp1hO7FlJ-U6mW981QVvto5EnaW6w-wo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667143482480-586l0j5e18jnemlkljndsufqib2mcud7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
