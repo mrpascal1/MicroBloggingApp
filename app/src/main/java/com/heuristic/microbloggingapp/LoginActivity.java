@@ -43,6 +43,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         auth = FirebaseAuth.getInstance();
+
+
+        // method1
+        //-------------------------------------------------
         binding.logbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,13 +61,14 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"ENTER PROPER PASSWORD",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // method2
                 auth.signInWithEmailAndPassword(email, pass)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(),"Login Successfull",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
@@ -74,6 +79,15 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+            }
+        });
+
+        binding.nuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
