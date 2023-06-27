@@ -17,14 +17,13 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.heuristic.microbloggingapp.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    EditText username;
-    EditText password;
-    TextView nuser;
-    MaterialButton logbtn;
+
+    private ActivityLoginBinding binding;
 
     @Override
     public void onStart() {
@@ -40,34 +39,36 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        logbtn =   findViewById(R.id.logbtn);
-        nuser = findViewById(R.id.nuser);
         auth = FirebaseAuth.getInstance();
-        logbtn.setOnClickListener(new View.OnClickListener() {
+
+
+        // method1
+        //-------------------------------------------------
+        binding.logbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email,pass;
-                email = username.getText().toString();
-                pass = password.getText().toString();
+                email = binding.username.getText().toString();
+                pass = binding.password.getText().toString();
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(LoginActivity.this,"ENTER EMAIL",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(pass) && pass.length() > 6){
+                if (TextUtils.isEmpty(pass) && (pass.length() < 6 || pass.length() > 16)){
                     Toast.makeText(LoginActivity.this,"ENTER PROPER PASSWORD",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // method2
                 auth.signInWithEmailAndPassword(email, pass)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(),"Login Successfull",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
@@ -78,6 +79,15 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+            }
+        });
+
+        binding.nuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
