@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,6 @@
     android:background="@drawable/bgg"
     tools:context=".LoginActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
     <TextView
         android:id="@+id/signin"
         android:layout_width="match_parent"
@@ -19,9 +16,9 @@
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
         android:gravity="center"
-        android:text="LOGIN"
+        android:text="@string/loginn"
         android:textColor="@color/white"
-        android:textSize="35dp"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <EditText
@@ -34,12 +31,13 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="#30ffffff"
-        android:drawableLeft="@drawable/baseline_person_24"
+        android:drawableStart="@drawable/baseline_person_24"
         android:drawablePadding="20dp"
-        android:hint="Username"
+        android:hint="@string/username"
         android:padding="20dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/white"
+         />
 
     <EditText
         android:id="@+id/password"
@@ -51,13 +49,14 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="#30ffffff"
-        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawableStart="@drawable/baseline_lock_24"
         android:drawablePadding="20dp"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="20dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/white" />
+        android:textColorHint="@color/white"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logbtn"
@@ -70,12 +69,12 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
-        android:text="LOGIN"
+        android:text="@string/log_in"
         android:textColor="#4CAF50"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
-        <TextView
+    <TextView
             android:id="@+id/nuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,6 +86,8 @@
             android:layout_marginBottom="2dp"
             android:text="@string/new_user_sign_up"
             android:textColor="@color/white" />
+
     </RelativeLayout>
-</androidx.core.widget.NestedScrollView>
+
+
 

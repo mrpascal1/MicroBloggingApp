@@ -2,4 +2,8 @@
     <string name="app_name">MicroBloggingApp</string>
     <string name="new_user_sign_up"><font color="white">NEW USER ? SIGN UP</font></string>
     <string name="login">LOGIN</string>
+    <string name="loginn">LOGIN</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="log_in">LOGIN</string>
 </resources>
