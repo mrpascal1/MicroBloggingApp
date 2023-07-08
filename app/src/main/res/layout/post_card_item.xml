@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="400dp"
+        android:layout_height="560dp"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        app:cardCornerRadius="18dp"
+        app:cardMaxElevation="25dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+
+                android:text="@string/shahid_raza"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/Date"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date"
+                android:padding="25dp"
+                android:text="@string/Content"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/likes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="410dp"
+                android:padding="18dp"
+                android:text="@string/likes"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="380dp"
+                android:src="@drawable/heart" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="58dp"
+                android:layout_marginTop="378dp"
+                android:src="@drawable/chat" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="380dp"
+                android:src="@drawable/send" />
+
+            <TextView
+                android:id="@+id/likes_"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="426dp"
+                android:text="@string/likes_"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
