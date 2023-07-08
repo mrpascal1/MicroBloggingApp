@@ -4,6 +4,9 @@
         android:icon="@drawable/ic_round_home"
         android:title="HOME"
         />
+    <item android:id="@+id/addPost"
+        android:title="Add Post"
+        android:icon="@drawable/ic_round_add_box"/>
     <item android:id="@+id/upload"
         android:icon="@drawable/ic_round_person"
         android:title="USER"
