@@ -41,10 +41,19 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.addPost) {
                     Intent intent = new Intent(MainActivity.this, AddPostActivity.class);
                     startActivity(intent);
+                    return false;
+                } else if (item.getItemId() == R.id.users) {
+                    Fragment usersFragment = new UsersFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, usersFragment).commitAllowingStateLoss();
+                } else if (item.getItemId() == R.id.home) {
+                    Fragment homeFragment = new HomeFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, homeFragment).commitAllowingStateLoss();
                 }
 
                 Toast.makeText(MainActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
-                return false;
+                return true;
             }
         });
 

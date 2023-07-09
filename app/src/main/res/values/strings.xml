@@ -11,4 +11,6 @@
     <string name="Content">The grandfather paradox is a hypothetical logical problem that could arise if a being travels back to a particular time in the past. The term comes from the concept that a person travels back to a time before their grandfather had children and assassinates him. This could make their own birth impossible.            </string>
     <string name="likes">2,098</string>
     <string name="likes_">likes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
