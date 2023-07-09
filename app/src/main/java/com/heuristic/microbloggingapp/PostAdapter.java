@@ -1,5 +1,6 @@
 package com.heuristic.microbloggingapp;
 
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.heuristic.microbloggingapp.databinding.PostCardItemBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
-    private List<Posts> posts;
+    private List<Posts> posts = new ArrayList<>();
 
     @NonNull
     @Override
@@ -25,7 +31,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-        holder.bind(posts.get(position));
+        holder.bind(posts.get(position)); // viewholder = 48357485, Post()
     }
 
     @Override
@@ -51,9 +57,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             binding = itemView;
         }
 
+        private String getDate(long time) {
+            Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+            cal.setTimeInMillis(time);
+            String date = DateFormat.format("dd-MM-yyyy", cal).toString();
+            return date;
+        }
+
         public void bind(Posts posts) {
             binding.name.setText(posts.getUser_name());
             binding.content.setText(posts.getPost_description());
+            long dv = Long.parseLong(posts.getTimestamp());// its need to be in milisecond
+            binding.date.setText(getDate(dv));
         }
     }
 }

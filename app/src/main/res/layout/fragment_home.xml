@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    android:background="@drawable/greenbkgd">
 
     <!-- TODO: Update blank fragment layout -->
     <View
@@ -34,7 +35,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/Mantasha"
+        android:id="@+id/postRecyclerview"
         android:layout_below="@+id/midhat"
         />
 

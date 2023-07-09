@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="400dp"
-        android:layout_height="560dp"
-        android:layout_rowWeight="1"
-        android:layout_columnWeight="1"
-        android:layout_gravity="fill"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
         app:cardCornerRadius="18dp"
         app:cardMaxElevation="25dp">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
@@ -53,46 +50,57 @@
                 android:text="@string/Content"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/likes"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="410dp"
-                android:padding="18dp"
-                android:text="@string/likes"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="380dp"
-                android:src="@drawable/heart" />
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/heart"
+                    android:layout_marginStart="12dp"/>
 
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="58dp"
-                android:layout_marginTop="378dp"
-                android:src="@drawable/chat" />
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/chat"
+                    android:layout_marginStart="8dp"/>
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="380dp"
-                android:src="@drawable/send" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/send"
+                    android:layout_marginStart="8dp"/>
 
-            <TextView
-                android:id="@+id/likes_"
+            </LinearLayout>
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="426dp"
-                android:text="@string/likes_"
-                android:textSize="18sp" />
+                android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="18dp"
+                    android:text="@string/likes"
+                    android:textSize="16sp"
+                    android:layout_marginStart="12dp"/>
+
+                <TextView
+                    android:id="@+id/likes_"
+                    android:layout_toEndOf="@id/likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="18dp"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/likes_"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
