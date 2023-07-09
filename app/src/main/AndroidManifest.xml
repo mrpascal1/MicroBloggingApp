@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MicroBloggingApp"
         tools:targetApi="31">
         <activity
+            android:name=".UserCardMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddPostActivity"
             android:exported="false" />
         <activity
