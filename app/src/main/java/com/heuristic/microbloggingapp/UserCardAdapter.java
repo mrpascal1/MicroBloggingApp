@@ -11,27 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHolder>{
     Context context;
-    ArrayList<UserCard> contactModelArrayList;
-    UserCardAdapter(Context context, ArrayList<UserCard> contactModelArrayList){
-        this.context=context;
-        this.contactModelArrayList=contactModelArrayList;
-    }
+    ArrayList<User> contactModelArrayList = new ArrayList<>();
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v=  LayoutInflater.from(context).inflate(R.layout.user_card_item,parent,false);
+        View v=  LayoutInflater.from(parent.getContext()).inflate(R.layout.user_card_item,parent,false);
         ViewHolder viewHolder=new ViewHolder(v);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtName.setText(contactModelArrayList.get(position).name);
-        holder.txtNumber.setText(contactModelArrayList.get(position).number);
+        holder.txtName.setText(contactModelArrayList.get(position).getUsername());
+        holder.txtNumber.setText(contactModelArrayList.get(position).getEmail());
     }
 
     @Override
@@ -39,9 +36,10 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
         return contactModelArrayList.size();
     }
 
-    public void setData(ArrayList<UserCard> contactModels) {
-        contactModelArrayList = contactModels;
-
+    public void setData(List<User> contactModels) {
+        contactModelArrayList.clear();
+        contactModelArrayList.addAll(contactModels);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
