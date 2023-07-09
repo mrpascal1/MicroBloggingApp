@@ -73,11 +73,11 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
     private void fetchUserNameFromUserId(String userId, Posts posts) {
-        databaseReference.child("Users").child(userId)
+        databaseReference.child("Users").child(userId) // https://www.firebasedb.com/Users/
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        User user = snapshot.getValue(User.class);
+                    public void onDataChange(@NonNull DataSnapshot snapshot) { // DataSnapshot={user_id="fdkjfdsjfdifgjfdkfd", username="ansarishahid", email="name@email.com"}
+                        User user = snapshot.getValue(User.class); // User(fdkjfdsjfdifgjfdkfd, ansarishahid, name@email.com)
                         if (user != null) {
                             username = user.getUsername();
                             String timestamp = String.valueOf(System.currentTimeMillis());
@@ -100,7 +100,7 @@ public class AddPostActivity extends AppCompatActivity {
     private void addPostToFirebaseDB(Posts posts, String timestamp) {
         // Post add code..
         // Posts/128936472/{post}
-        databaseReference.child("Posts").child(timestamp).setValue(posts)
+        databaseReference.child("Posts").child(timestamp).setValue(posts) // https://www.firebasedb.com/Posts/1562153524/{postId="12783647", user_name:"", user_id, likes}
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
