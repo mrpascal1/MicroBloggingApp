@@ -18,53 +18,58 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.heuristic.microbloggingapp.databinding.FragmentHomeBinding;
+import com.heuristic.microbloggingapp.databinding.FragmentUsersBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
+public class UsersFragment extends Fragment {
 
-public class HomeFragment extends Fragment {
-    private FragmentHomeBinding binding;
-    private PostAdapter adapter;
+    private FragmentUsersBinding binding;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private UserCardAdapter adapter;
+    private List<User> userList;
 
-    private List<Posts> postsList;
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentUsersBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
-        postsList = new ArrayList<>();
-        adapter = new PostAdapter();
-        binding.postRecyclerview.setAdapter(adapter);
-        binding.postRecyclerview.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false));
-        binding.postRecyclerview.setHasFixedSize(true);
-        getPosts();
+        userList = new ArrayList<>();
+
+        adapter = new UserCardAdapter();
+        binding.recyclerContact.setAdapter(adapter);
+        binding.recyclerContact.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false));
+        binding.recyclerContact.setHasFixedSize(true);
+
+        getUsers();
     }
 
-    private void getPosts() {
-        databaseReference.child("Posts")
+    private void getUsers() {
+        databaseReference.child("Users")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) { // https://.../Posts/List
-                        postsList.clear();
+                        userList.clear();
                         for (DataSnapshot snapshot1: snapshot.getChildren()) {
-                            Posts post = snapshot1.getValue(Posts.class);
+                            User post = snapshot1.getValue(User.class);
                             if (post != null) {
-                                postsList.add(post);
+                                userList.add(post);
                             }
                         }
-                        adapter.setData(postsList);
+                        adapter.setData(userList);
                     }
 
                     @Override
@@ -73,4 +78,5 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+
 }
