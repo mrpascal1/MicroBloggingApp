@@ -1,6 +1,6 @@
 package com.heuristic.microbloggingapp;
 
-public class User {
+public class  User {
 
     private String userId, username, email;
 
