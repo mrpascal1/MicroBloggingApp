@@ -21,14 +21,12 @@ import java.util.TimeZone;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
     private List<Posts> posts = new ArrayList<>();
-
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         PostCardItemBinding view = PostCardItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new PostViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         holder.bind(posts.get(position)); // viewholder = 48357485, Post()
