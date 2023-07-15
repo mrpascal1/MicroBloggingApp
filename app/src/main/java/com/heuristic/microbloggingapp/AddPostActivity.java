@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.heuristic.microbloggingapp.databinding.ActivityAddPostBinding;
 
+import java.util.HashMap;
+
 public class AddPostActivity extends AppCompatActivity {
 
     private ActivityAddPostBinding binding;
@@ -65,7 +67,7 @@ public class AddPostActivity extends AppCompatActivity {
                 if (!postDescription.equals("")) {
                     // Post
                     String userId = firebaseUser.getUid();
-                    Posts posts = new Posts("", userId, "", "0", postDescription, "");
+                    Posts posts = new Posts("", userId, "", new HashMap<>(), postDescription, "");
                     fetchUserNameFromUserId(userId, posts);
                 }
             }
