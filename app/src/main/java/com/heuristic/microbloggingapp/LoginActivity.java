@@ -38,6 +38,11 @@ public class LoginActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         checkemptyfield();
+        binding.nuser.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
         public void checkemptyfield()
@@ -74,11 +79,7 @@ public void userlogin(String email,String pass) {
 
                 }
             });
-    binding.nuser.setOnClickListener(v -> {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-        startActivity(intent);
-        finish();
-    });
+
 }
 }
 

@@ -1,9 +1,12 @@
 package com.heuristic.microbloggingapp;
 
-public class Posts {
-    private String user_name, user_id, post_id, likes, post_description, timestamp;
+import java.util.HashMap;
 
-    public Posts(String user_name, String user_id, String post_id, String likes, String post_description, String timestamp) {
+public class Posts {
+    private String user_name, user_id, post_id, post_description, timestamp;
+    private HashMap<String, Object> likes;
+
+    public Posts(String user_name, String user_id, String post_id, HashMap<String, Object> likes, String post_description, String timestamp) {
         this.user_name = user_name;
         this.user_id = user_id;
         this.post_id = post_id;
@@ -39,11 +42,11 @@ public class Posts {
         this.post_id = post_id;
     }
 
-    public String getLikes() {
+    public HashMap<String, Object> getLikes() {
         return likes;
     }
 
-    public void setLikes(String likes) {
+    public void setLikes(HashMap<String, Object> likes) {
         this.likes = likes;
     }
 
