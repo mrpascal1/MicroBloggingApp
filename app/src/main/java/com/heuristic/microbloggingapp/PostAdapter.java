@@ -21,12 +21,16 @@ import java.util.TimeZone;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
 
     private List<Posts> posts = new ArrayList<>();
+    private UtilityButtonClickListener utilityButtonClickListener;
+    String userId;
+
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         PostCardItemBinding view = PostCardItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new PostViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         holder.bind(posts.get(position)); // viewholder = 48357485, Post()
@@ -35,6 +39,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public int getItemCount() {
         return posts.size();
+    }
+
+    public void setOnUtilityButtonClickListener(UtilityButtonClickListener utilityButtonClickListener, String userId) {
+        this.utilityButtonClickListener = utilityButtonClickListener;
+        this.userId = userId;
     }
 
     public void setData(List<Posts> posts) {
@@ -67,6 +76,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             binding.content.setText(posts.getPost_description());
             long dv = Long.parseLong(posts.getTimestamp());// its need to be in milisecond
             binding.date.setText(getDate(dv));
+            if (posts.getLikes() != null) {
+                if (posts.getLikes().containsKey(userId)) {
+                    binding.heartIv.setImageResource(R.drawable.ic_heart_filled);
+                } else {
+                    binding.heartIv.setImageResource(R.drawable.ic_heart_normal);
+                }
+                if (posts.getLikes().size() <= 1) {
+                    binding.likes.setText(posts.getLikes().size() + " like");
+                } else {
+                    binding.likes.setText(posts.getLikes().size() + " likes");
+                }
+            } else {
+                binding.likes.setText("0 likes");
+                binding.heartIv.setImageResource(R.drawable.ic_heart_normal);
+            }
+
+            binding.heartIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (utilityButtonClickListener != null) {
+                        utilityButtonClickListener.onLikeClicked(posts.getPost_id());
+                    }
+                }
+            });
         }
     }
+}
+
+interface UtilityButtonClickListener {
+    void onLikeClicked(String postId);
 }
