@@ -16,6 +16,7 @@ import java.util.List;
 public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHolder>{
     Context context;
     ArrayList<User> contactModelArrayList = new ArrayList<>();
+    private UserCardClickListener userCardClickListener;
 
     @NonNull
     @Override
@@ -27,8 +28,17 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtName.setText(contactModelArrayList.get(position).getUsername());
-        holder.txtNumber.setText(contactModelArrayList.get(position).getEmail());
+        User user = contactModelArrayList.get(position);
+        holder.txtName.setText(user.getUsername());
+        holder.txtNumber.setText(user.getEmail());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userCardClickListener != null) {
+                    userCardClickListener.onClick(user.getUserId(), user.getUsername());
+                }
+            }
+        });
     }
 
     @Override
@@ -40,6 +50,10 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
         contactModelArrayList.clear();
         contactModelArrayList.addAll(contactModels);
         notifyDataSetChanged();
+    }
+
+    public void setUserCardClickListener(UserCardClickListener userCardClickListener) {
+        this.userCardClickListener = userCardClickListener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -54,6 +68,10 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
 
         }
     }
+}
+
+interface UserCardClickListener {
+    void onClick(String userId, String username);
 }
 
 
