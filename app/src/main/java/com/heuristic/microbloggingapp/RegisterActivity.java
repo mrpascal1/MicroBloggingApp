@@ -1,6 +1,6 @@
 package com.heuristic.microbloggingapp;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,20 +9,16 @@ import android.os.Bundle;
 
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
 
@@ -36,13 +32,13 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Users");
 
       binding.SignUpbtn.setOnClickListener(v -> {
-        String musername = binding.username.getText().toString().trim();
-        String memail = binding.email.getText().toString().trim();
-        String mpassword = binding.password.getText().toString().trim();
+        String musername = Objects.requireNonNull(binding.username.getText()).toString().trim();
+        String memail = Objects.requireNonNull(binding.email.getText()).toString().trim();
+        String mpassword = Objects.requireNonNull(binding.password.getText()).toString().trim();
 
         if(!musername.equals("") && !memail.equals("") && mpassword.length()>6)
         {
@@ -91,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
 
-                        String userId = task.getResult().getUser().getUid();
+                        String userId = Objects.requireNonNull(task.getResult().getUser()).getUid();
                         User user = new User(userId, username, email);
                         addUserToDB(user);
                         //Insert to db
@@ -99,23 +95,15 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+                .addOnFailureListener(Throwable::printStackTrace);
     }
 
     private void addUserToDB(User user) {
         databaseReference.child(user.getUserId()).setValue(user)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
+                .addOnCompleteListener(task -> {
+                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }).addOnFailureListener(e -> Toast.makeText(RegisterActivity.this, "Database failed", Toast.LENGTH_SHORT).show());
     }
 }
