@@ -1,5 +1,6 @@
 package com.heuristic.microbloggingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,15 @@ public class UsersFragment extends Fragment {
         userList = new ArrayList<>();
 
         adapter = new UserCardAdapter();
+        adapter.setUserCardClickListener(new UserCardClickListener() {
+            @Override
+            public void onClick(String userId, String username) {
+                Intent intent = new Intent(requireContext(), UserDetailActivity.class);
+                intent.putExtra("userId", userId);
+                intent.putExtra("username", username);
+                startActivity(intent);
+            }
+        });
         binding.recyclerContact.setAdapter(adapter);
         binding.recyclerContact.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false));
         binding.recyclerContact.setHasFixedSize(true);
