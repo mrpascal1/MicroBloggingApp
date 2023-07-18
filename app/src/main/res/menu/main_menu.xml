@@ -5,7 +5,7 @@
         android:title="HOME"
         />
     <item android:id="@+id/addPost"
-        android:title="Add Post"
+        android:title="ADD POST"
         android:icon="@drawable/ic_round_add_box"/>
     <item android:id="@+id/users"
         android:icon="@drawable/ic_round_person"

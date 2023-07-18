@@ -15,9 +15,10 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:layout_alignParentBottom="true"
         android:textAlignment="center"
+        android:background="#2196F3"
         app:itemTextColor="@color/black"
         app:menu="@menu/main_menu"/>
 </RelativeLayout>

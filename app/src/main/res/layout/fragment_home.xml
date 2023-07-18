@@ -9,17 +9,14 @@
     <!-- TODO: Update blank fragment layout -->
     <View
         android:id="@+id/home"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:background="#5BA06F" />
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#2196F3" />
     <View
         android:id="@+id/midhat"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#5BA06F"
+        android:layout_height="1dp"
+        android:background="#2196F3"
         android:layout_alignBottom="@id/home"/>
     <TextView
         android:layout_width="wrap_content"
@@ -27,8 +24,8 @@
         android:text="HOME"
         android:textColor="#FFFFFF"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textSize="30sp"
+        android:layout_marginTop="16dp"
+        android:textSize="14sp"
         android:textStyle="bold"
         />
 
@@ -36,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/postRecyclerview"
+        android:background="#FFFFFF"
         android:layout_below="@+id/midhat"
         />
 
