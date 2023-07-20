@@ -30,7 +30,6 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = contactModelArrayList.get(position);
         holder.txtName.setText(user.getUsername());
-        holder.txtNumber.setText(user.getEmail());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,13 +56,12 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView txtName,txtNumber;
-        ImageView img1;
+        TextView txtName;
         public  ViewHolder(View itemView)
         {
             super(itemView);
             txtName=itemView.findViewById(R.id.txtName);
-            txtNumber=itemView.findViewById(R.id.txtNumber);
+
 
 
         }
