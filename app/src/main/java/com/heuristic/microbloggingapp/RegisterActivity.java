@@ -40,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         String memail = Objects.requireNonNull(binding.email.getText()).toString().trim();
         String mpassword = Objects.requireNonNull(binding.password.getText()).toString().trim();
 
-        if(musername.length()<6 && !memail.equals("") && mpassword.length()>6)
+        if(musername.length() >= 5 && !memail.equals("") && mpassword.length()>6)
         {
 
             //Login
