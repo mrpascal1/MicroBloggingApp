@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.heuristic.microbloggingapp.databinding.FragmentUsersBinding;
+import com.heuristic.microbloggingapp.databinding.UserCardItemBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,8 @@ public class UsersFragment extends Fragment {
     private DatabaseReference databaseReference;
     private UserCardAdapter adapter;
     private List<User> userList;
+
+
 
 
     @Override
@@ -67,6 +70,7 @@ public class UsersFragment extends Fragment {
         getUsers();
     }
 
+
     private void getUsers() {
         databaseReference.child("Users")
                 .addValueEventListener(new ValueEventListener() {
@@ -88,5 +92,6 @@ public class UsersFragment extends Fragment {
                     }
                 });
     }
+
 
 }

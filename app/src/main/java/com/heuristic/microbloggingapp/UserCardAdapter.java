@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.heuristic.microbloggingapp.databinding.UserCardItemBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +20,16 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
     ArrayList<User> contactModelArrayList = new ArrayList<>();
     private UserCardClickListener userCardClickListener;
 
+
+
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v=  LayoutInflater.from(parent.getContext()).inflate(R.layout.user_card_item,parent,false);
         ViewHolder viewHolder=new ViewHolder(v);
         return viewHolder;
+
     }
 
     @Override
@@ -49,6 +55,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
         contactModelArrayList.clear();
         contactModelArrayList.addAll(contactModels);
         notifyDataSetChanged();
+
     }
 
     public void setUserCardClickListener(UserCardClickListener userCardClickListener) {
@@ -61,16 +68,14 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
         {
             super(itemView);
             txtName=itemView.findViewById(R.id.txtName);
-
-
-
         }
     }
-}
 
+}
 interface UserCardClickListener {
     void onClick(String userId, String username);
 }
+
 
 
 
