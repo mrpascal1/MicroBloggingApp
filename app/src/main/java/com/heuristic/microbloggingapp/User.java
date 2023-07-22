@@ -2,12 +2,12 @@ package com.heuristic.microbloggingapp;
 
 public class User {
 
-    private String userId, username, email;
+    private String userId, username;
 
-    public User(String userId, String username, String email) {
+    public User(String userId, String username) {
         this.userId = userId;
         this.username = username;
-        this.email = email;
+
     }
 
     public User() {
@@ -30,11 +30,5 @@ public class User {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

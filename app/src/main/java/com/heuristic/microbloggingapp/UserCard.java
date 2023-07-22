@@ -1,10 +1,10 @@
 package com.heuristic.microbloggingapp;
 
 public class UserCard {
-    String name, number;
+    String name;
 
-    public UserCard(String name, String number) {
+    public UserCard(String name) {
         this.name = name;
-        this.number = number;
+
     }
 }
