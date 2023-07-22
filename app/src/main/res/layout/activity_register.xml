@@ -3,106 +3,127 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/back1">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/signintv"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="sans-serif"
-        android:gravity="center_horizontal"
-        android:text="Register"
-        android:textColor="@color/white"
-        android:textSize="40dp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="30dp">
+        <TextView
+            android:id="@+id/signintv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="120dp"
+            android:text="SIGN UP!"
+            android:textColor="#807B7B"
+            android:textSize="50dp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/username"
-        android:drawableLeft="@drawable/baseline_person_24"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/signintv"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        android:background="#30ffffff"
-        android:hint="Username"
-        android:padding="20dp"
-        android:textSize="25dp"
-        android:drawablePadding="20dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/username"
+                android:hint="Username"
+                android:textSize="20sp"
+                android:textColorHint="#807B7B"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawablePadding="20dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/email"
+                android:hint="Email"
+                android:textSize="20sp"
+                android:textColorHint="#807B7B"
+                android:drawableStart="@drawable/baseline_email_24"
+                android:drawablePadding="20dp"
+                android:inputType="textEmailAddress"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/password"
+                android:hint="Password"
+                android:textSize="20sp"
+                android:textColorHint="#807B7B"
+                android:drawableStart="@drawable/baseline_lock_24"
+                android:drawablePadding="20dp"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <EditText
-        android:id="@+id/email"
-        android:drawableLeft="@drawable/baseline_person_24"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/username"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        android:background="#30ffffff"
-        android:hint="Email"
-        android:padding="20dp"
-        android:drawablePadding="20dp"
-        android:textSize="25dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/SignUpbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="100dp"
+            android:backgroundTint="#12BFEE"
+            android:text="Sign up"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+             />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/signintv"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="220dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        android:background="#30ffffff"
-        android:drawableLeft="@drawable/baseline_lock_24"
-        android:drawablePadding="20dp"
-        android:hint="Password"
-        android:padding="20dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="25dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
 
-    <Button
-        android:id="@+id/SignUpbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="420dp"
-        android:layout_marginRight="140dp"
-        android:backgroundTint="@color/white"
-        android:padding="15dp"
-        android:text="SignUp"
-        android:textColor="#4CAF50"
-        android:textSize="30dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="EXISTING USER?"
+                android:textColor="#807B7B" />
 
-    <TextView
-        android:id="@+id/existingUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SignUpbtn"
-        android:layout_centerHorizontal="true"
-        android:textSize="18sp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="2dp"
-        android:text="Existing user? Sign IN"
-        android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/existingUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:text="SIGN IN"
+                android:textColor="#12BEEE" />
+
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>
 
