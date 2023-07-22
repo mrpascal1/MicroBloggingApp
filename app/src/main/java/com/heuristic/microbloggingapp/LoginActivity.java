@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.heuristic.microbloggingapp.databinding.ActivityLoginBinding;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
     FirebaseAuth auth;
 
@@ -49,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         {
             binding.logbtn.setOnClickListener(view -> {
                 String email, pass;
-                email = binding.username.getText().toString();
-                pass = binding.password.getText().toString();
+                email = Objects.requireNonNull(binding.email.getText()).toString();
+                pass = Objects.requireNonNull(binding.password.getText()).toString();
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(LoginActivity.this, "ENTER EMAIL", Toast.LENGTH_SHORT).show();
                     return;

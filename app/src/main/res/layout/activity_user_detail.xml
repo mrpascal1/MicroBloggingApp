@@ -7,56 +7,69 @@
     android:orientation="vertical"
     tools:context=".UserDetailActivity">
 
-    <ImageView
-        android:id="@+id/backIv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="12dp"
-        android:src="@drawable/ic_round_arrow_back"/>
+      <LinearLayout
+          android:layout_height="210dp"
+          android:layout_width="match_parent"
+          android:orientation="vertical"
+          android:background="@drawable/bg_userdetails"
+          >
+
+          <ImageView
+              android:id="@+id/backIv"
+              android:layout_width="30dp"
+              android:layout_height="30dp"
+              android:layout_marginStart="12dp"
+              android:layout_marginTop="12dp"
+              android:src="@drawable/ic_round_arrow_back"
+              />
 
 
-    <FrameLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/bg_username"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="25dp">
+          <FrameLayout
+              android:layout_width="100dp"
+              android:layout_height="100dp"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginTop="15dp"
+              android:background="@drawable/bg_username">
 
-        <TextView
-            android:id="@+id/shortUsernameTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textSize="32sp"
-            android:text="JD"/>
+              <TextView
+                  android:id="@+id/shortUsernameTv"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:maxLines="1"
+                  android:text="JD"
+                  android:textColor="#03A9F4"
+                  android:textSize="32sp" />
 
-    </FrameLayout>
+          </FrameLayout>
+
+          <TextView
+              android:id="@+id/usernameTv"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginTop="6dp"
+              android:text="John Doe"
+              android:textSize="22sp"
+              android:textColor="@color/white"/>
+
+      </LinearLayout>
+
 
     <TextView
-        android:id="@+id/usernameTv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="18dp"
-        android:textSize="18sp"
-        android:text="John Doe"/>
+        android:textSize="22sp"
+        android:paddingHorizontal="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Recent Posts"
+        android:textColor="#0F1112"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="4dp"
         android:background="#858585"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:paddingHorizontal="8dp"
-        android:layout_marginTop="12dp"
-        android:text="Recent Posts"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postRecyclerview"
