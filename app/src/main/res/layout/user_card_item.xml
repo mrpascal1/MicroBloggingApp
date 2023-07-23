@@ -27,14 +27,14 @@
                 android:layout_marginStart="11dp"
                 android:orientation="vertical">
 
+
                 <TextView
+                    android:id="@+id/txtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtName"
-                    tools:text="Name"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    />
+                    tools:text="Name" />
 
             </LinearLayout>
         </LinearLayout>

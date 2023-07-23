@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
 
                         String userId = Objects.requireNonNull(task.getResult().getUser()).getUid();
-                        User user = new User(userId, username, email);
+                        User user = new User(userId, username);
                         addUserToDB(user);
                         //Insert to db
                     } else {
