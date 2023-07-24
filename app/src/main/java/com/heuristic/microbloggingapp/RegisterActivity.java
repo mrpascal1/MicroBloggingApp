@@ -1,14 +1,17 @@
 package com.heuristic.microbloggingapp;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-
+    private ProgressDialog progressDialog;
 
     private com.heuristic.microbloggingapp.databinding.ActivityRegisterBinding binding;
 
@@ -30,6 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = com.heuristic.microbloggingapp.databinding.ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        initProgressDialog();
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -64,20 +69,31 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+
+    private void initProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Registering user...");
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
+
     private void fetchUserFromEmail(String username, String email, String password) {
+        progressDialog.show();
         firebaseAuth.fetchSignInMethodsForEmail(email)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<String> users = task.getResult().getSignInMethods();
-                        if (users != null)
-                        if (!users.isEmpty()) {
-                            Toast.makeText(RegisterActivity.this, "User Already exist", Toast.LENGTH_SHORT).show();
-                        } else {
-                            registerNewUser(username, email, password);
+                        if (users != null) {
+                            if (!users.isEmpty()) {
+                                hideProgress();
+                                Toast.makeText(RegisterActivity.this, "User Already exist", Toast.LENGTH_SHORT).show();
+                            } else {
+                                registerNewUser(username, email, password);
+                            }
                         }
                     }
                 }).addOnFailureListener(e -> {
-
+                    hideProgress();
                 });
     }
 
@@ -86,7 +102,6 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-
                         String userId = Objects.requireNonNull(task.getResult().getUser()).getUid();
                         User user = new User(userId, username, email);
                         addUserToDB(user);
@@ -95,15 +110,28 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Register failed", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(Throwable::printStackTrace);
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        hideProgress();
+                    }
+                });
     }
 
     private void addUserToDB(User user) {
         databaseReference.child(user.getUserId()).setValue(user)
                 .addOnCompleteListener(task -> {
+                    hideProgress();
                     Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                }).addOnFailureListener(e -> Toast.makeText(RegisterActivity.this, "Database failed", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> {
+                    hideProgress();
+                    Toast.makeText(RegisterActivity.this, "Database failed", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void hideProgress() {
+        progressDialog.dismiss();
     }
 }
