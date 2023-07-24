@@ -20,5 +20,6 @@
         android:textAlignment="center"
         android:background="#2196F3"
         app:itemTextColor="@color/black"
+        app:labelVisibilityMode="unlabeled"
         app:menu="@menu/main_menu"/>
 </RelativeLayout>
