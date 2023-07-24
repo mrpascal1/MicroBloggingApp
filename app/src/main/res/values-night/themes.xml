@@ -3,5 +3,7 @@
     <style name="Base.Theme.MicroBloggingApp" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:statusBarColor">@color/app_blue</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>
