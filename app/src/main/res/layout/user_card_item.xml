@@ -7,9 +7,10 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="7dp"
+        app:cardCornerRadius="4dp"
         app:cardUseCompatPadding="true"
         >
         <LinearLayout
@@ -17,7 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:id="@+id/row"
-            android:padding="11dp"
+            android:padding="18dp"
             >
 
 
@@ -25,17 +26,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
-                android:orientation="vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
 
                     <TextView
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/txtName"
                         tools:text="Name"
-                        android:textSize="23sp"
-                        android:textStyle="bold"
+                        android:textSize="20sp"
                         />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_right_small"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

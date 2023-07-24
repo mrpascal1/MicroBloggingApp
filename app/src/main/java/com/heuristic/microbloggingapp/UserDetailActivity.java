@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.heuristic.microbloggingapp.databinding.ActivityUserDetailBinding;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -75,35 +77,17 @@ public class UserDetailActivity extends AppCompatActivity {
 
         fetchClickedUserPosts();
 
-        binding.backIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        binding.backIv.setOnClickListener(v -> finish());
 
-        binding.logoutIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialAlertDialogBuilder(v.getContext())
-                        .setTitle("Micro Blogging App")
-                        .setMessage("Are you sure you want to logout?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                firebaseAuth.signOut();
-                                openLoginActivity();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
+        binding.logoutIv.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
+                .setTitle("Micro Blogging App")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    firebaseAuth.signOut();
+                    openLoginActivity();
+                })
+                .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                .show());
     }
 
     private void openLoginActivity() {
@@ -114,7 +98,7 @@ public class UserDetailActivity extends AppCompatActivity {
     }
 
     private void setUserDetails() {
-        binding.usernameTv.setText(clickedUserName);
+        binding.usernameTv.setText(StringUtils.capitalize(clickedUserName));
         binding.shortUsernameTv.setText(clickedUserName.substring(0, 2).toUpperCase());
     }
 

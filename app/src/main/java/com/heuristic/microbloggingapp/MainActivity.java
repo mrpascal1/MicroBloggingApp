@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.replace(R.id.container, profileFragment).commitAllowingStateLoss();
                 }
 
-                Toast.makeText(MainActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

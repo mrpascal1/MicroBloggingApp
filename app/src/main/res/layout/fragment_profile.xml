@@ -41,7 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:maxLines="1"
-                android:text="JD"
+                tools:text="JD"
+                android:textStyle="bold"
                 android:textColor="#03A9F4"
                 android:textSize="32sp" />
 
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="6dp"
-            android:text="John Doe"
+            tools:text="John Doe"
             android:textSize="22sp"
             android:textColor="@color/white"/>
 
@@ -72,8 +73,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="4dp"
-        android:background="#858585"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="4dp"
+        android:background="#E1E1E1"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/profileRecyclerview"

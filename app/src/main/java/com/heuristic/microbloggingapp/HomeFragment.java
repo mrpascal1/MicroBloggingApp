@@ -63,7 +63,9 @@ public class HomeFragment extends Fragment {
         }, firebaseUser.getUid());
 
         binding.postRecyclerview.setAdapter(adapter);
-        binding.postRecyclerview.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, true);
+        linearLayoutManager.setStackFromEnd(true);
+        binding.postRecyclerview.setLayoutManager(linearLayoutManager);
         binding.postRecyclerview.setHasFixedSize(true);
         getPosts();
     }
