@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.heuristic.microbloggingapp.databinding.UserCardItemBinding;
@@ -26,6 +28,7 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View v=  LayoutInflater.from(parent.getContext()).inflate(R.layout.user_card_item,parent,false);
         ViewHolder viewHolder=new ViewHolder(v);
         return viewHolder;
@@ -35,7 +38,17 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = contactModelArrayList.get(position);
+        if (position % 4 == 0) {
+            holder.cardLayout.setCardBackgroundColor(ContextCompat.getColor(context, R.color.card1));
+        } else if (position % 3 == 0) {
+            holder.cardLayout.setCardBackgroundColor(ContextCompat.getColor(context, R.color.card2));
+        } else if (position % 2 == 0) {
+            holder.cardLayout.setCardBackgroundColor(ContextCompat.getColor(context, R.color.card3));
+        } else {
+            holder.cardLayout.setCardBackgroundColor(ContextCompat.getColor(context, R.color.card4));
+        }
         holder.txtName.setText(user.getUsername());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,10 +77,12 @@ public class UserCardAdapter extends RecyclerView.Adapter<UserCardAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtName;
+        CardView cardLayout;
         public  ViewHolder(View itemView)
         {
             super(itemView);
             txtName=itemView.findViewById(R.id.txtName);
+            cardLayout=itemView.findViewById(R.id.cardLayout);
         }
     }
 

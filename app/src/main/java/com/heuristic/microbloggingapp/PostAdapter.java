@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.heuristic.microbloggingapp.databinding.PostCardItemBinding;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,15 +69,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         private String getDate(long time) {
             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
             cal.setTimeInMillis(time);
-            String date = DateFormat.format("dd-MM-yyyy", cal).toString();
+            String date = DateFormat.format("dd LLL yyyy", cal).toString();
             return date;
         }
 
         public void bind(Posts posts) {
-            binding.name.setText(posts.getUser_name());
+            binding.name.setText(StringUtils.capitalize(posts.getUser_name()));
             binding.content.setText(posts.getPost_description());
             long dv = Long.parseLong(posts.getTimestamp());// its need to be in milisecond
-            binding.date.setText(getDate(dv));
+            binding.date.setText("Posted on " + getDate(dv));
             if (posts.getLikes() != null) {
                 if (posts.getLikes().containsKey(userId)) {
                     binding.heartIv.setImageResource(R.drawable.ic_heart_filled);

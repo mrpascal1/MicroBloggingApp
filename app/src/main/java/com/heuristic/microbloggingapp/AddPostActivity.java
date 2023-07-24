@@ -3,6 +3,7 @@ package com.heuristic.microbloggingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class AddPostActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     private String username = "";
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -38,6 +40,8 @@ public class AddPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddPostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        initProgressDialog();
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -49,6 +53,13 @@ public class AddPostActivity extends AppCompatActivity {
 
         setPostButtonListener();
     }
+
+    private void initProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCanceledOnTouchOutside(false);
+    }
+
 
     private void setBackPressListener() {
         binding.backIv.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +86,7 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
     private void fetchUserNameFromUserId(String userId, Posts posts) {
+        progressDialog.show();
         databaseReference.child("Users").child(userId) // https://www.firebasedb.com/Users/
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -94,7 +106,7 @@ public class AddPostActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        progressDialog.dismiss();
                     }
                 });
     }
@@ -106,14 +118,17 @@ public class AddPostActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             Toast.makeText(AddPostActivity.this, "Posted...", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
                         e.printStackTrace();
                     }
                 });

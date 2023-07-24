@@ -34,9 +34,6 @@ public class UsersFragment extends Fragment {
     private UserCardAdapter adapter;
     private List<User> userList;
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -8,7 +8,10 @@
         android:title="ADD POST"
         android:icon="@drawable/ic_round_add_box"/>
     <item android:id="@+id/users"
-        android:icon="@drawable/ic_round_person"
-        android:title="USER"
+        android:icon="@drawable/ic_users"
+        android:title="USERS"
         />
+    <item android:id="@+id/profile"
+        android:icon="@drawable/ic_round_person"
+        android:title="MY PROFILE" />
 </menu>

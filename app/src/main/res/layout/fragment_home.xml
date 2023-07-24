@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment"
-    android:background="@drawable/greenbkgd">
+    tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <View
@@ -21,11 +20,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HOME"
+        android:text="Home"
         android:textColor="#FFFFFF"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         />
 

@@ -1,17 +1,19 @@
 package com.heuristic.microbloggingapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.IntentCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,60 +26,57 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.heuristic.microbloggingapp.databinding.ActivityUserDetailBinding;
+import com.heuristic.microbloggingapp.databinding.FragmentProfileBinding;
+import com.heuristic.microbloggingapp.databinding.FragmentUsersBinding;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UserDetailActivity extends AppCompatActivity {
-
-    private ActivityUserDetailBinding binding;
-
-    String clickedUserId = "";
-    String clickedUserName = "";
+public class ProfileFragment extends Fragment {
     String currentUserId = "";
+    private FragmentProfileBinding binding;
 
     private FirebaseUser firebaseUser;
-    private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private PostAdapter adapter;
+    private FirebaseAuth firebaseAuth;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityUserDetailBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         adapter = new PostAdapter();
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             currentUserId = firebaseUser.getUid();
         }
-
-        Intent intent = getIntent();
-        clickedUserId = intent.getStringExtra("userId");
-        clickedUserName = intent.getStringExtra("username");
-
-        setUserDetails();
-
-        binding.postRecyclerview.setAdapter(adapter);
-        binding.postRecyclerview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        binding.postRecyclerview.setHasFixedSize(true);
-
+        getCurrentUserDetails();
 
         adapter.setOnUtilityButtonClickListener(new UtilityButtonClickListener() {
             @Override
             public void onLikeClicked(String postId) {
                 setLikeInDatabase(postId);
             }
-        }, currentUserId);
+        }, firebaseUser.getUid());
+        binding.profileRecyclerview.setAdapter(adapter);
+        binding.profileRecyclerview.setLayoutManager(new LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false));
+        binding.profileRecyclerview.setHasFixedSize(true);
 
         fetchClickedUserPosts();
-
-        binding.backIv.setOnClickListener(v -> finish());
 
         binding.logoutIv.setOnClickListener(v -> new MaterialAlertDialogBuilder(v.getContext())
                 .setTitle("Micro Blogging App")
@@ -88,18 +87,59 @@ public class UserDetailActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
                 .show());
+
     }
 
     private void openLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(requireContext(), LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
+        requireActivity().finish();
+    }
+    private void fetchClickedUserPosts() {
+
+        databaseReference.child("Posts").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Posts> postsArrayList = new ArrayList<>();
+                for (DataSnapshot snapshot1: snapshot.getChildren()) {
+                    Posts posts = snapshot1.getValue(Posts.class);
+                    if (posts != null && posts.getUser_id().equals(currentUserId)) {
+                        postsArrayList.add(posts);
+                    }
+                }
+                adapter.setData(postsArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
-    private void setUserDetails() {
-        binding.usernameTv.setText(StringUtils.capitalize(clickedUserName));
-        binding.shortUsernameTv.setText(clickedUserName.substring(0, 2).toUpperCase());
+    private void getCurrentUserDetails() {
+        databaseReference.child("Users").child(currentUserId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User user = snapshot.getValue(User.class);
+                        if (user != null) {
+                            setUserDetails(user.getUsername());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+
+    private void setUserDetails(String username) {
+        binding.usernameTv.setText(StringUtils.capitalize(username));
+        binding.shortUsernameTv.setText(username.substring(0, 2).toUpperCase());
     }
 
     private void setLikeInDatabase(String postId) {
@@ -151,31 +191,6 @@ public class UserDetailActivity extends AppCompatActivity {
                     }
                 });
 
-    }
-
-
-    private void fetchClickedUserPosts() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-
-        databaseReference.child("Posts").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Posts> postsArrayList = new ArrayList<>();
-                for (DataSnapshot snapshot1: snapshot.getChildren()) {
-                    Posts posts = snapshot1.getValue(Posts.class);
-                    if (posts != null && posts.getUser_id().equals(clickedUserId)) {
-                        postsArrayList.add(posts);
-                    }
-                }
-                adapter.setData(postsArrayList);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
 }

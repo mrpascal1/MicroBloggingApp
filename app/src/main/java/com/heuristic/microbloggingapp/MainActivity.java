@@ -50,9 +50,12 @@ public class MainActivity extends AppCompatActivity {
                     Fragment homeFragment = new HomeFragment();
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.container, homeFragment).commitAllowingStateLoss();
+                } else if (item.getItemId()==R.id.profile) {
+                    Fragment profileFragment = new ProfileFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.container, profileFragment).commitAllowingStateLoss();
                 }
 
-                Toast.makeText(MainActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
